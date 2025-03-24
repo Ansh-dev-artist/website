@@ -1,0 +1,33 @@
+[images]
+  remote_images = [
+    "https://ext.same-assets.com/875528577/259348630.webp",
+    "https://ext.same-assets.com/875528577/3258482415.webp",
+    "https://ext.same-assets.com/875528577/3638224228.webp",
+    "https://ext.same-assets.com/875528577/3431768213.svg",
+    "https://ext.same-assets.com/875528577/1446454131.webp",
+    "https://ext.same-assets.com/875528577/2866288088.webp",
+    "https://ext.same-assets.com/**"
+  ]
+
+[build]
+  command = "bun run build"
+  publish = ".next"
+
+[build.environment]
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+  NEXT_USE_NETLIFY_EDGE = "true"
+  NETLIFY_SITE_NAME = "colorful-igamecenter-ansh"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Ensure proper asset handling
+[[headers]]
+  for = "/_next/image/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
